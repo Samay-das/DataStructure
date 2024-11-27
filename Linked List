@@ -1,0 +1,191 @@
+package DataStructure;
+import java.util.*;
+class Students {
+    int enrollmentId;
+    String name;
+    int age;
+    double fees;
+    Students next;
+}
+class Operation {
+    Students head;
+    int count;
+    public void insertDetails(int e,String n,int a,double f){
+        Students student = new Students();
+        student.enrollmentId = e;
+        student.name = n;
+        student.age = a;
+        student.fees = f;
+        student.next = null;
+        count++;
+        if (head == null) {
+            head = student;
+        }else{
+            Students temp = head;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            temp.next = student;
+        }
+    }
+    public void insertAtBegening(int e,String n,int a,double f){
+        Students student = new Students();
+        student.enrollmentId = e;
+        student.name = n;
+        student.age = a;
+        student.fees = f;
+        student.next = null;
+        count++;
+        if (head == null) {
+            head = student;
+        }else{
+            student.next = head;
+            head = student;
+        }
+    }
+    public void insertAtEnd(int e,String n,int a,double f){
+        Students student = new Students();
+        student.enrollmentId = e;
+        student.name = n;
+        student.age = a;
+        student.fees = f;
+        student.next = null;
+        count++;
+        Students temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = student;
+    }
+    public void insertAtPostion(int e,String n,int a,double f,int index){
+        Students student = new Students();
+        student.enrollmentId = e;
+        student.name = n;
+        student.age = a;
+        student.fees = f;
+        student.next = null;
+        count++;
+        if (index == 0) {
+            head = student;
+        }else{
+            Students temp = head;
+            Students temp2 = student;
+            for(int i = 0; i < index -1; i++){
+                temp = temp.next;
+            }
+            temp2.next = temp.next;
+            temp.next = temp2;
+        }
+    }
+    public void deleteAtPosition(int index){
+        Students temp = head;
+        if (head == null) {
+            System.out.println("*********************************************************************************************************************");
+            System.out.println("No data is present to delete ");
+            System.out.println("*********************************************************************************************************************");
+        }else{
+        System.out.println("Delected Student data is ");
+        if (index == 0) {
+            System.out.println("*********************************************************************************************************************");
+            System.out.println(temp.enrollmentId+"\t\t"+temp.name+"\t\t"+temp.age+"\t\t"+temp.fees+"\t\t"+temp.next);
+            System.out.println("*********************************************************************************************************************");
+            head = head.next;
+            temp.next = null;
+        }else{
+            Students temp2 = null;
+            for(int i = 0; i < index - 1; i++){
+                temp = temp.next;
+            }
+            temp2 = temp.next;
+            System.out.println("*********************************************************************************************************************");
+            System.out.println(temp2.enrollmentId+"\t"+temp2.name+"\t"+temp2.age+"\t"+temp2.fees+"\t\t"+temp2.next);
+            System.out.println("*********************************************************************************************************************");
+            temp.next = temp2.next;
+            temp2 = null;
+             }
+        }
+    }
+    public void showDetail(){
+        Students temp = head;
+        if (head == null) {
+            System.out.println("*********************************************************************************************************************");
+            System.out.println("No Data is inserted :");
+            System.out.println("*********************************************************************************************************************");
+        }else{
+        System.out.println("*********************************************************************************************************************");
+        while (temp.next != null) {
+            System.out.print(temp.enrollmentId+"\t\t");
+            System.out.print(temp.name+"\t\t");
+            System.out.print(temp.age+"\t\t");
+            System.out.print(temp.fees+"\t\t");
+            System.out.println(temp.next);
+            temp = temp.next;
+        }
+            System.out.print(temp.enrollmentId+"\t\t");
+            System.out.print(temp.name+"\t\t");
+            System.out.print(temp.age+"\t\t");
+            System.out.print(temp.fees+"\t\t");
+            System.out.println(temp.next);
+            System.out.println("*********************************************************************************************************************");
+             }    
+        }
+}
+
+public class College {
+    public static void main(String[] args) {
+        Operation op = new Operation();
+        Scanner scanner = new Scanner(System.in);
+        int ageOfStudent,enrollOfStudent,choice,index;
+        String nameOfStudent;
+        double feesOfStudent;
+        do{
+            System.out.println("Please choose wisely :\n1.To insert detail of the student.\n2.To insert detail of student at the specfic position.\n3.To see the student table.\n4.To delete the student data from a specific position.\n5.To Exit");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the Enrolment Id of student :");
+                    enrollOfStudent = scanner.nextInt();
+                    System.out.println("Enter the Name of student :");
+                    nameOfStudent = scanner.next();
+                    System.out.println("Enter the Age of student :");
+                    ageOfStudent = scanner.nextInt();
+                    System.out.println("Enter the Fees of student :");
+                    feesOfStudent = scanner.nextDouble();
+                    op.insertDetails(enrollOfStudent, nameOfStudent, ageOfStudent, feesOfStudent);
+                    break;
+                case 2:
+                    System.out.println("Enter the Enrolment Id of student :");
+                    enrollOfStudent = scanner.nextInt();
+                    System.out.println("Enter the Name of student :");
+                    nameOfStudent = scanner.next();
+                    System.out.println("Enter the Age of student :");
+                    ageOfStudent = scanner.nextInt();
+                    System.out.println("Enter the Fees of student :");
+                    feesOfStudent = scanner.nextDouble();
+                    System.out.println("Enter the postion you like to insert :");
+                    index = scanner.nextInt();
+                    op.insertAtPostion(enrollOfStudent, nameOfStudent, ageOfStudent, feesOfStudent, index);
+                    break;
+                case 3:
+                    op.showDetail();
+                    break;
+                case 4:
+                System.out.println("Enter the index of the student you like to delete :");
+                    index = scanner.nextInt();
+                    op.deleteAtPosition(index);
+                    break;
+                case 5:
+                    System.out.println("Thank You for using!!");
+                    break;
+                case 6:
+                Operation op1 = new Operation();
+                System.out.println(" "+op1.count);
+                default :
+                System.out.println("Invalid Choice!!");
+            }
+        }while(choice != 7);
+        
+        scanner.close();
+    }
+}
+
